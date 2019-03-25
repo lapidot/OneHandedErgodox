@@ -73,50 +73,36 @@ void K_tap(uint16_t keycode){
     register_code(keycode);
     unregister_code(keycode);
 };
-
+/*
 void persistent_default_layer_set(uint16_t default_layer){
     eeconfig_update_default_layer(default_layer);
     default_layer_set(default_layer);
 };
-
+*/
 // Automatic number generation of important keywords
+enum my_layers{
+    _WINBASE= 0,
+	_NUMPAD=1,
+	_ARROWS=2,
+	_MIRROR=3,
+	_FUNC=4,
+	_XFUNC=5
+};
+
 enum my_keycodes{
-    // Layer numbers
-	_WINBASE= 0,
-	//_OSXBASE,
-	_NUMPAD,
-	_ARROWS,
-	//_XARROWS,
-	_MIRROR,
-	//_XMIRROR,
-	//_XNUMPAD,
-	_FUNC,
-	
-	_XFUNC,
-	// These use process_record_user()
-	//WINBASE,
-	//ARROWS,
-	//NUMPAD,
-	//XARROWS,
-	//XNUMPAD,
-	//XFUNC,
-	//OSXBASE,
-	
-	ZUNDO=SAFE_RANGE,
-	XREDO,
-	CTRLB,
-	CPYPST,
+	CPYPST=SAFE_RANGE,
 	SHFT_CAP,
-	//CPYPST_X,
-	// Tap_Dance nums
-	//WARR,
-	//NUMTB,//    WNUM,
-	//XARR,
-	//XNUM,
-/*	PLACEHOLDER, // can always be here
-  EPRM,
-  VRSN,
-  RGB_SLD, */
+	EPRM,
+	VRSN,
+	RGB_SLD//,
+	//NEXT_RANGE
+};
+
+enum my_tapdance{
+	//PLACEHOLDER=NEXT_RANGE,
+	ZUNDO,
+	XREDO,
+	//CTRLB,
 	SUP,
 	CLS,
 	SCL,
@@ -126,13 +112,8 @@ enum my_keycodes{
 	SSQ, //SHIFT ON HOLD SEMICOLON, QUOTATION MARK ON DOUBLE
 	SLSH, //SLASH ON TAP, BACKSLASH ON DOUBLETAP
 	// Copy paste
-	CPC,
-	//CPC_X,
-	//CUT COPY PASTE   ,CCPC,VCPC,VPASTE
-	//VCPC_W,
-	//VCPC_X,
-	//ZUNDO_X,
-	//XREDO_X
+	CPC
+	//PLACEHOLDER,// = SAFE_RANGE, // can always be here
 	
 };
 
@@ -514,7 +495,7 @@ static uint16_t key_timer;
 static uint8_t  caps_status = 0;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    /*case EPRM:
+    case EPRM:
       if (record->event.pressed) {
         eeconfig_init();
       }
@@ -534,10 +515,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-	  */
 	case _WINBASE:
         if(record->event.pressed){
-            persistent_default_layer_set(1UL<<_WINBASE);
+            //persistent_default_layer_set(1UL<<_WINBASE);
             #ifdef AUDIO_ENABLE
               PLAY_SONG(tone_colemak);
             #endif
