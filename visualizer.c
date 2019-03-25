@@ -359,21 +359,21 @@ static void get_visualizer_layer_and_color(visualizer_state_t* state) {
     }
     else if (state->status.layer & 0x20) {
         state->target_lcd_color = LCD_COLOR(RED, saturation, 0xFF);
-        state->layer_text = "Mirrored Qwerty";
+        state->layer_text = "Helper";
     }
     else if (state->status.layer & 0x8) {
         state->target_lcd_color = LCD_COLOR(YELLOW, saturation, 0xFF);
-        state->layer_text = "Arrows";
+        state->layer_text = "Mirrored Qwerty";
     }
     else if (state->status.layer & 0x4) {
         state->target_lcd_color = LCD_COLOR(BLUE, saturation, 0xFF);
-        state->layer_text = "Numpad";
+        state->layer_text = "Arrows";
         stop_keyframe_animation(&led_test_animation);
         start_keyframe_animation(&sweep_on_sweep_off_left_and_right);
     }
     else if (state->status.layer & 0x2) {
         state->target_lcd_color = LCD_COLOR(ORANGE, saturation, 0xFF);
-        state->layer_text = "Mirror";
+        state->layer_text = "Numpad";
     }
     else {
         state->target_lcd_color = LCD_COLOR(OCEAN, saturation, 0xFF);
